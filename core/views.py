@@ -29,11 +29,19 @@ class BookingListCreateView(generics.ListCreateAPIView):
  
     def perform_create(self, serializer):
         data = serializer.validated_data
+        discount = data['discount']
         user = data['user']
         room = data['room']
         
         # if this user hasn't booked before give him a discount 
         if not Booking.objects.filter(user=user).exists():
-            
+            # give a some discount 10%
+            discount = (room.price * 0.01)
+            serializer.save(discount=discount)
+        serializer.save()        
+        
+        
+        
+                        
     
     
