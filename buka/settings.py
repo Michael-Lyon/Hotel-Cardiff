@@ -1,6 +1,7 @@
 import datetime
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +16,7 @@ SECRET_KEY = "django-insecure-08wd4q^g_%1bzu#o5v*_!20c+$r4(5zn!ej@l&(c1$2@^39$81
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["hotel-cardiff-production.up.railway.app", "localhost"]
 
 
 # Application definition
@@ -138,12 +139,20 @@ CORS_ALLOW_HEADERS = [
     'x-requested-with',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://hotel-cardiff-production.up.railway.app']
+
+
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ["Bearer"],
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=10000),
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=10000)
 }
 
+
+DATABASE_URL = "postgresql://postgres:BIWKr08xFoI2Lq0gmUrL@containers-us-west-44.railway.app:6843/railway"
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
+}
 
 LOGGING = {
     'version': 1,
