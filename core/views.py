@@ -4,11 +4,15 @@ from rest_framework import generics, mixins, status
 from rest_framework.response import Response
 from .models import Hotel, Booking, Room
 from .serializers import BookingSerializer, HotelSerializer, RoomSerializer, UserSerializer, ChangePasswordSerializer
-
+from django.http import HttpResponse
 from rest_framework_simplejwt.authentication import JWTAuthentication
 User = get_user_model()
 
 # Create your views here.
+
+def home(request):
+    msg = f"FUCK YOU CELESTINE!!!!!!!!!!!"
+    return HttpResponse(msg, content_type='text/plain')
 
 class UserListCreateView(generics.ListCreateAPIView):
     queryset = User.objects.all()
