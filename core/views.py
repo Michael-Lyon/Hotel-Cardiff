@@ -60,7 +60,7 @@ class RoomDetailView(generics.RetrieveAPIView):
 
 class UserDetailView(generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer()
+    serializer_class = UserSerializer
     lookup_field = "username"
 
         
